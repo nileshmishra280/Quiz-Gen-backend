@@ -1,5 +1,5 @@
 {
-	"name": "my-front-app",
+	"name": "frontend",
 	"private": true,
 	"version": "0.0.1",
 	"type": "module",
@@ -23,8 +23,6 @@
 		"eslint": "^9.18.0",
 		"eslint-config-prettier": "^10.0.1",
 		"eslint-plugin-svelte": "^3.0.0",
-		"flowbite": "^3.1.2",
-		"flowbite-svelte": "^0.48.4",
 		"globals": "^16.0.0",
 		"prettier": "^3.4.2",
 		"prettier-plugin-svelte": "^3.3.3",
@@ -34,8 +32,5 @@
 		"tailwindcss": "^4.0.0",
 		"typescript": "^5.0.0",
 		"vite": "^6.0.0"
-	},
-	"dependencies": {
-		"flowbite-svelte-icons": "^2.0.2"
 	}
 }
