@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Quizee.Api.props" />
+</Project>

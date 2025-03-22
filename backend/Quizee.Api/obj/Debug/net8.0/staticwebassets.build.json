@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "boOrTjk3gyMb314cCbpjfd35D5nKVR+4zTDGUqyPWNs=",
+  "Source": "Quizee.Api",
+  "BasePath": "_content/Quizee.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
