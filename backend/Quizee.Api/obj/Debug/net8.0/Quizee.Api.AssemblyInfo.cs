@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Quizee.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aff9c73733ee9f206d5f3e56192f9d89fb9f14a5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+72cd5065f34457aa2b733675e8478fab954f7ef7")]
 [assembly: System.Reflection.AssemblyProductAttribute("Quizee.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Quizee.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -10,6 +10,7 @@ public class QuizeeContext : DbContext
     }
 
     public DbSet<User> Users { get; set; }
+    public DbSet<Quiz> Quizzes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
