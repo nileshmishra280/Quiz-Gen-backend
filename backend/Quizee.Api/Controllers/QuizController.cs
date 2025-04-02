@@ -56,9 +56,10 @@ public class QuizController : ControllerBase
         }
     }
 
-    [HttpGet("user/{userId}")]
-    public async Task<ActionResult<object>> GetUserQuizzes(int userId)
+    [HttpGet("getUserQuiz/{userId}")]
+    public async Task<ActionResult<object>> GetUserQuiz(int userId)
     {
+        _logger.LogInformation("Getting user quiz for userId: {UserId}", userId);
         try
         {
             var quizzes = await _context.Quizzes
@@ -66,6 +67,8 @@ public class QuizController : ControllerBase
                 .OrderByDescending(q => q.CreationDate)
                 .ToListAsync();
 
+            _logger.LogInformation("Found {Count} quizzes for user {UserId}", quizzes.Count, userId);
+            
             return Ok(new
             {
                 success = true,
