@@ -7,7 +7,7 @@ using Quizee.Api.Models;
 namespace Quizee.Api.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]")]  // This makes the base route "api/Quiz"
 public class QuizController : ControllerBase
 {
     private readonly ILogger<QuizController> _logger;
@@ -79,6 +79,50 @@ public class QuizController : ControllerBase
         {
             _logger.LogError(ex, "Error retrieving quizzes for user: {UserId}", userId);
             return StatusCode(500, new { success = false, message = $"Failed to retrieve quizzes: {ex.Message}" });
+        }
+    }
+
+    // This makes the full route "api/Quiz/deleteByTitle/{userId}/{title}"
+    [HttpDelete("deleteByTitle/{userId}/{title}")]
+    public async Task<ActionResult<object>> DeleteQuizByTitle(string userId, string title)
+    {
+        try
+        {
+            _logger.LogInformation("Delete request received - UserId: {UserId}, Title: {Title}", userId, title);
+
+            // Parse userId to integer
+            if (!int.TryParse(userId, out int userIdInt))
+            {
+                _logger.LogWarning("Invalid user ID format: {UserId}", userId);
+                return BadRequest(new { success = false, message = "Invalid user ID format" });
+            }
+
+            // Decode the title
+            var decodedTitle = Uri.UnescapeDataString(title);
+            _logger.LogInformation("Looking for quiz with title: {Title}", decodedTitle);
+
+            // Find the quiz
+            var quiz = await _context.Quizzes
+                .FirstOrDefaultAsync(q => q.UserId == userIdInt && 
+                                        q.Title.ToLower() == decodedTitle.ToLower());
+
+            if (quiz == null)
+            {
+                _logger.LogWarning("Quiz not found - UserId: {UserId}, Title: {Title}", userId, decodedTitle);
+                return NotFound(new { success = false, message = "Quiz not found" });
+            }
+
+            // Delete the quiz
+            _context.Quizzes.Remove(quiz);
+            await _context.SaveChangesAsync();
+
+            _logger.LogInformation("Quiz deleted successfully - UserId: {UserId}, Title: {Title}", userId, decodedTitle);
+            return Ok(new { success = true, message = "Quiz deleted successfully" });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error deleting quiz - UserId: {UserId}, Title: {Title}", userId, title);
+            return StatusCode(500, new { success = false, message = "Internal server error" });
         }
     }
 }

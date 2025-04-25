@@ -33,15 +33,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// Replace the existing CORS configuration with:
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", builder =>
     {
-        builder
-            .AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader();
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
     });
 });
 
@@ -53,6 +51,19 @@ builder.Services.AddScoped<JwtService>();
 
 var app = builder.Build();
 
+// Add this debug middleware
+app.Use(async (context, next) =>
+{
+    Console.WriteLine($"Request: {context.Request.Method} {context.Request.Path}");
+    await next();
+});
+
+// Make sure CORS is configured before routing
+app.UseCors("AllowAll");
+app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -61,12 +72,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseAuthentication();
-
-// Add this before app.UseAuthorization()
-app.UseCors("AllowAll");
-
-app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
