@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Quizee.Api.Data;
@@ -11,9 +12,11 @@ using Quizee.Api.Data;
 namespace Quizee.Api.Migrations
 {
     [DbContext(typeof(QuizeeContext))]
-    partial class QuizeeContextModelSnapshot : ModelSnapshot
+    [Migration("20250425185030_AddLeaderboardTable")]
+    partial class AddLeaderboardTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace Quizee.Api.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Quizee.Api.Models.LeaderboardData", b =>
+            modelBuilder.Entity("LeaderboardData", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,8 +33,9 @@ namespace Quizee.Api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<double>("AverageScore")
-                        .HasColumnType("double precision");
+                    b.Property<decimal>("AverageScore")
+                        .HasPrecision(5, 2)
+                        .HasColumnType("numeric(5,2)");
 
                     b.Property<string>("HostName")
                         .IsRequired()
@@ -45,10 +49,6 @@ namespace Quizee.Api.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("QuizDuration")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("QuizName")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -151,6 +151,9 @@ namespace Quizee.Api.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
