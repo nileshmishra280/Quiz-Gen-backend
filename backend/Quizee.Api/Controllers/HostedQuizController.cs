@@ -141,4 +141,37 @@ public class HostedQuizController : ControllerBase
             return StatusCode(500, new { success = false, message = ex.Message });
         }
     }
+
+    [HttpGet("get-all")]
+    public async Task<ActionResult<object>> GetAllQuizzes()
+    {
+        try
+        {
+            var allQuizzes = await _context.HostedQuizLeaderboards
+                .OrderByDescending(q => q.QuizDateTime)
+                .ToListAsync();
+
+            var results = allQuizzes.Select(q => new HostedQuizLeaderboardDto
+            {
+                RoomId = q.RoomId,
+                QuizDateTime = q.QuizDateTime,
+                HostName = q.HostName,
+                ParticipantScores = JsonSerializer.Deserialize<List<ParticipantScore>>(q.ParticipantScores) ?? new List<ParticipantScore>(),
+                AverageScore = q.AverageScore,
+                TotalParticipants = q.TotalParticipants,
+                QuizDuration = q.QuizDuration
+            });
+
+            return Ok(new { 
+                success = true, 
+                quizzes = results,
+                totalCount = allQuizzes.Count
+            });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error retrieving all quizzes");
+            return StatusCode(500, new { success = false, message = ex.Message });
+        }
+    }
 }
