@@ -12,12 +12,6 @@ public class QuizeeContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Quiz> Quizzes { get; set; }
     public DbSet<Question> Questions { get; set; }
-    public DbSet<HostedQuizLeaderboard> HostedQuizLeaderboards { get; set; }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<User>()
-            .HasIndex(u => u.Email)
-            .IsUnique();
-    }
+    public DbSet<LeaderboardData> LeaderboardData { get; set; }
+    
 }

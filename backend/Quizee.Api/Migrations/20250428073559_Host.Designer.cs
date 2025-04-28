@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Quizee.Api.Data;
@@ -11,9 +12,11 @@ using Quizee.Api.Data;
 namespace Quizee.Api.Migrations
 {
     [DbContext(typeof(QuizeeContext))]
-    partial class QuizeeContextModelSnapshot : ModelSnapshot
+    [Migration("20250428073559_Host")]
+    partial class Host
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,6 +35,9 @@ namespace Quizee.Api.Migrations
 
                     b.Property<double>("AverageScore")
                         .HasColumnType("double precision");
+
+                    b.Property<int>("HostId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("HostName")
                         .IsRequired()
@@ -60,6 +66,8 @@ namespace Quizee.Api.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("HostId");
 
                     b.ToTable("LeaderboardData");
                 });
@@ -153,6 +161,17 @@ namespace Quizee.Api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Quizee.Api.Models.LeaderboardData", b =>
+                {
+                    b.HasOne("Quizee.Api.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("HostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Quizee.Api.Models.Quiz", b =>
