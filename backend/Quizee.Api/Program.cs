@@ -8,7 +8,7 @@ using Quizee.Api.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add this line after CreateBuilder
-builder.WebHost.UseUrls("http://localhost:5095");
+builder.WebHost.UseUrls("http://localhost:80");
 
 // Add services to the container.
 builder.Services.AddControllers();
