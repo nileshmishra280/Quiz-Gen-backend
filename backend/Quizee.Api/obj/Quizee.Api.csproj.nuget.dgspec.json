@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\niles\\Documents\\Quiz-Gen\\backend\\Quizee.Api\\Quizee.Api.csproj": {}
+    "C:\\Users\\niles\\Desktop\\My Projects\\Quiz-Gen\\backend\\Quizee.Api\\Quizee.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\niles\\Documents\\Quiz-Gen\\backend\\Quizee.Api\\Quizee.Api.csproj": {
+    "C:\\Users\\niles\\Desktop\\My Projects\\Quiz-Gen\\backend\\Quizee.Api\\Quizee.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\niles\\Documents\\Quiz-Gen\\backend\\Quizee.Api\\Quizee.Api.csproj",
+        "projectUniqueName": "C:\\Users\\niles\\Desktop\\My Projects\\Quiz-Gen\\backend\\Quizee.Api\\Quizee.Api.csproj",
         "projectName": "Quizee.Api",
-        "projectPath": "C:\\Users\\niles\\Documents\\Quiz-Gen\\backend\\Quizee.Api\\Quizee.Api.csproj",
+        "projectPath": "C:\\Users\\niles\\Desktop\\My Projects\\Quiz-Gen\\backend\\Quizee.Api\\Quizee.Api.csproj",
         "packagesPath": "C:\\Users\\niles\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\niles\\Documents\\Quiz-Gen\\backend\\Quizee.Api\\obj\\",
+        "outputPath": "C:\\Users\\niles\\Desktop\\My Projects\\Quiz-Gen\\backend\\Quizee.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\niles\\AppData\\Roaming\\NuGet\\NuGet.Config",
